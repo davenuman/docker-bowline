@@ -28,7 +28,7 @@ RUN source /opt/rh/php55/enable && \
 RUN echo source /opt/rh/php55/enable > /etc/profile.d/php55.sh && \
     echo export X_SCLS="\`scl enable php55 'echo $X_SCLS'\`" >> /etc/profile.d/php55.sh
 
-ENV PATH=/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin${PATH:+:${PATH}}
+ENV PATH=/opt/rh/php55/root/usr/bin:/opt/rh/php55/root/usr/sbin:$PATH
 
 # Apache config.
 RUN sed -i 's,/var/www/html,/var/www/docroot,' /etc/httpd/conf/httpd.conf
