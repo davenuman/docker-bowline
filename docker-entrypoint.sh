@@ -14,6 +14,8 @@ if [ "$OWNER" != "0" ]; then
   usermod -o -u $OWNER apache
   usermod -s /bin/bash apache
   groupmod -o -g $GROUP apache
+  usermod -d /var/www apache
+  useradd -o -u 1000 -g 1000 -M -d /var/www www-data
   chown -R --silent apache:apache /var/www
 fi
 echo The apache user and group has been set to the following:
