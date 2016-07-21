@@ -16,6 +16,7 @@ if [ "$OWNER" != "0" ]; then
   groupmod -o -g $GROUP apache
   usermod -d /var/www apache
   id -u www-data &>/dev/null || useradd -o -u $OWNER -g $GROUP -M -d /var/www www-data
+  grep -c www-data /etc/group || groupadd -o -g $GROUP www-data
   chown -R --silent apache:apache /var/www
 fi
 echo The apache user and group has been set to the following:
