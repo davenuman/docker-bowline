@@ -16,7 +16,6 @@ if [ "$OWNER" != "0" ]; then
 fi
 usermod -s /bin/bash apache
 usermod -d /var/www apache
-chown -R --silent apache:apache /var/www
 
 # Add www-data user as same as apache user
 if [ ! $(id -u www-data &>/dev/null) ]; then
