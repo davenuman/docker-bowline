@@ -12,13 +12,20 @@ OWNER=$(stat -c '%u' /var/www)
 GROUP=$(stat -c '%g' /var/www)
 if [ "$OWNER" != "0" ]; then
   usermod -o -u $OWNER apache
-  usermod -s /bin/bash apache
   groupmod -o -g $GROUP apache
-  usermod -d /var/www apache
-  id -u www-data &>/dev/null || useradd -o -u $OWNER -g $GROUP -M -d /var/www www-data
-  grep -c www-data /etc/group || groupadd -o -g $GROUP www-data
-  chown -R --silent apache:apache /var/www
 fi
+usermod -s /bin/bash apache
+usermod -d /var/www apache
+chown -R --silent apache:apache /var/www
+
+# Add www-data user as same as apache user
+if [ ! $(id -u www-data &>/dev/null) ]; then
+  OWNER=$(id -u apache)
+  GROUP=$(id -g apache)
+  useradd -o -u $OWNER -g $GROUP -M -d /var/www www-data
+  grep -c www-data /etc/group || groupadd -o -g $GROUP www-data
+fi
+
 echo The apache user and group has been set to the following:
 id apache
 
