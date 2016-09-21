@@ -8,8 +8,14 @@ mkdir -p /var/www/logs/php-fpm /var/www/files-private /var/www/docroot
 echo "*" > /var/www/logs/.gitignore
 
 # Set the apache user and group to match the host user.
-OWNER=$(stat -c '%u' /var/www)
-GROUP=$(stat -c '%g' /var/www)
+# Optionally use the HOST_USER env var if provided.
+if [ "$HOST_USER" ]; then
+  OWNER=$(echo $HOST_USER | cut -d: -f1)
+  GROUP=$(echo $HOST_USER | cut -d: -f2)
+else
+  OWNER=$(stat -c '%u' /var/www)
+  GROUP=$(stat -c '%g' /var/www)
+fi
 if [ "$OWNER" != "0" ]; then
   usermod -o -u $OWNER apache
   groupmod -o -g $GROUP apache
