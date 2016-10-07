@@ -46,6 +46,9 @@ RUN source /opt/rh/php55/enable && \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -d detect_unicode=0 && \
   ln -s /usr/bin/composer.phar /usr/bin/composer
 
+# Solution for https://bugzilla.redhat.com/show_bug.cgi?id=1020147
+RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
+
 # Set a custom entrypoint.
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
