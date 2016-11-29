@@ -10,7 +10,7 @@ RUN yum -y install scl-utils git mariadb-libs mariadb wget sudo python-setuptool
     yum clean all
 
 # Install php 5.5
-RUN wget https://www.softwarecollections.org/en/scls/rhscl/php55/epel-7-x86_64/download/rhscl-php55-epel-7-x86_64.noarch.rpm && \
+RUN wget https://www.softwarecollections.org/repos/rhscl/php55/epel-7-x86_64/noarch/rhscl-php55-epel-7-x86_64.noarch.rpm && \
     yum -y install rhscl-php55-epel-7-x86_64.noarch.rpm && \
     rm -v rhscl-php55-epel-7-x86_64.noarch.rpm && \
     yum -y install php55 php55-php-gd php55-php-mysqlnd php55-php-pdo php55-php-xml php55-php-opcache php55-php-fpm php55-php-soap php55-php-mbstring && \
