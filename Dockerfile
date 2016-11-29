@@ -49,6 +49,20 @@ RUN source /opt/rh/php55/enable && \
 # Solution for https://bugzilla.redhat.com/show_bug.cgi?id=1020147
 RUN sed -i -e "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
 
+# Install xdebug and clean up devel packages afterwards
+RUN yum -y install php55-php-devel gcc && yum clean all && \
+    pecl install xdebug && \
+    yum -y remove gcc php55-php-devel && yum clean all
+
+# Xdebug settings.
+RUN \
+  echo zend_extension=xdebug.so >> /opt/rh/php55/root/etc/php.d/xdebug.ini && \
+  echo xdebug.remote_enable=1 >> /opt/rh/php55/root/etc/php.d/xdebug.ini && \
+  echo xdebug.remote_connect_back=1 >> /opt/rh/php55/root/etc/php.d/xdebug.ini && \
+  echo xdebug.remote_autostart=0 >> /opt/rh/php55/root/etc/php.d/xdebug.ini && \
+  echo xdebug.max_nesting_level=256 >> /opt/rh/php55/root/etc/php.d/xdebug.ini && \
+  echo xdebug.remote_log=/var/www/logs/xdebug.log >> /opt/rh/php55/root/etc/php.d/xdebug.ini
+
 # Set a custom entrypoint.
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
