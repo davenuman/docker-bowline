@@ -1,10 +1,8 @@
 #!/bin/bash -e
 set -e
 
-source /opt/rh/php55/enable
-
 # Create required directories just in case.
-mkdir -p /var/www/logs/php-fpm /var/www/files-private /var/www/docroot
+mkdir -p /var/www/files-private /var/www/docroot
 echo "*" > /var/www/logs/.gitignore
 
 # Set the apache user and group to match the host user.
