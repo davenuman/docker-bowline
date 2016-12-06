@@ -43,7 +43,7 @@ RUN \
   echo extension=apc.so >> /etc/php.d/apc.ini && \
   echo apc.enabled=1 >> /etc/php.d/apc.ini && \
   echo apc.shm_size=128M >> /etc/php.d/apc.ini && \
-  echo zend_extension=xdebug.so >> /etc/php.d/xdebug.ini && \
+  echo zend_extension=/usr/lib64/php/modules/xdebug.so >> /etc/php.d/xdebug.ini && \
   echo xdebug.remote_enable=1 >> /etc/php.d/xdebug.ini && \
   echo xdebug.remote_connect_back=1 >> /etc/php.d/xdebug.ini && \
   echo xdebug.remote_autostart=0 >> /etc/php.d/xdebug.ini && \
