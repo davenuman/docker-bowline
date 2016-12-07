@@ -16,7 +16,8 @@ RUN yum -y install httpd mod_ssl && yum clean all
 
 # Apache config.
 RUN sed -i 's,/var/www/html,/var/www/docroot,' /etc/httpd/conf/httpd.conf
-ADD ./conf/apache2/docker-host.conf /etc/httpd/conf.d/docker-host.conf
+RUN echo "Include conf/docker-host.conf" >> /etc/httpd/conf/httpd.conf
+ADD ./conf/apache2/docker-host.conf /etc/httpd/conf/docker-host.conf
 
 # PHP config.
 ADD ./conf/php5/docker-php.ini /etc/php.d/docker-php.ini
