@@ -8,7 +8,7 @@ RUN yum -y install git mysql wget sudo python-setuptools nano vim pv && \
     yum clean all
 
 # Install php
-RUN yum -y install php php-gd php-pdo_mysql php-xml php-soap php-mbstring php-pear && \
+RUN yum -y install php php-gd php-pdo_mysql php-xml php-soap php-mbstring php-pear php-imap && \
     yum clean all
 
 # Install apache
